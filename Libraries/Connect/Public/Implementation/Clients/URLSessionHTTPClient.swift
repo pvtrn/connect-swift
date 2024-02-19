@@ -52,7 +52,9 @@ open class URLSessionHTTPClient: NSObject, HTTPClientInterface, @unchecked Senda
     ) -> Cancelable {
         assert(!request.isGRPC, "URLSessionHTTPClient does not support gRPC, use NIOHTTPClient")
         var urlRequest = URLRequest(httpRequest: request)
-        urlRequest.assumesHTTP3Capable = self.enableHttp3
+        if #available(iOS 14.5, *) {
+            urlRequest.assumesHTTP3Capable = self.enableHttp3
+        }
         let task = self.session.dataTask(with: urlRequest) { data, urlResponse, error in
             if let httpURLResponse = urlResponse as? HTTPURLResponse {
                 onResponse(HTTPResponse(
