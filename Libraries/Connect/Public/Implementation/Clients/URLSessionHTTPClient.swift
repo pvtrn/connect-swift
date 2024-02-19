@@ -32,9 +32,11 @@ open class URLSessionHTTPClient: NSObject, HTTPClientInterface, @unchecked Senda
     /// `URLSessionTask.delegate = <URLSessionStream instance>` once we are able to set iOS 15
     /// as the base deployment target.
     private var streams = [Int: URLSessionStream]()
+    private var enableHttp3: Bool = false
 
-    public init(configuration: URLSessionConfiguration = .default) {
+    public init(configuration: URLSessionConfiguration = .default, enableHttp3: Bool = false) {
         super.init()
+        self.enableHttp3 = enableHttp3
         self.session = URLSession(
             configuration: configuration,
             delegate: self,
@@ -49,7 +51,8 @@ open class URLSessionHTTPClient: NSObject, HTTPClientInterface, @unchecked Senda
         onResponse: @escaping @Sendable (HTTPResponse) -> Void
     ) -> Cancelable {
         assert(!request.isGRPC, "URLSessionHTTPClient does not support gRPC, use NIOHTTPClient")
-        let urlRequest = URLRequest(httpRequest: request)
+        var urlRequest = URLRequest(httpRequest: request)
+        urlRequest.assumesHTTP3Capable = self.enableHttp3
         let task = self.session.dataTask(with: urlRequest) { data, urlResponse, error in
             if let httpURLResponse = urlResponse as? HTTPURLResponse {
                 onResponse(HTTPResponse(

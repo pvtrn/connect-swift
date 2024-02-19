@@ -1,0 +1,76 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:connect-swift}",
+            "name": "Debug protoc-gen-connect-swift",
+            "program": "${workspaceFolder:connect-swift}/.build/debug/protoc-gen-connect-swift",
+            "preLaunchTask": "swift: Build Debug protoc-gen-connect-swift"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:connect-swift}",
+            "name": "Release protoc-gen-connect-swift",
+            "program": "${workspaceFolder:connect-swift}/.build/release/protoc-gen-connect-swift",
+            "preLaunchTask": "swift: Build Release protoc-gen-connect-swift"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:connect-swift}",
+            "name": "Debug protoc-gen-connect-swift-mocks",
+            "program": "${workspaceFolder:connect-swift}/.build/debug/protoc-gen-connect-swift-mocks",
+            "preLaunchTask": "swift: Build Debug protoc-gen-connect-swift-mocks"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:connect-swift}",
+            "name": "Release protoc-gen-connect-swift-mocks",
+            "program": "${workspaceFolder:connect-swift}/.build/release/protoc-gen-connect-swift-mocks",
+            "preLaunchTask": "swift: Build Release protoc-gen-connect-swift-mocks"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:connect-swift}",
+            "name": "Debug ConnectConformanceClient",
+            "program": "${workspaceFolder:connect-swift}/.build/debug/ConnectConformanceClient",
+            "preLaunchTask": "swift: Build Debug ConnectConformanceClient"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:connect-swift}",
+            "name": "Release ConnectConformanceClient",
+            "program": "${workspaceFolder:connect-swift}/.build/release/ConnectConformanceClient",
+            "preLaunchTask": "swift: Build Release ConnectConformanceClient"
+        }
+    ]
+}
