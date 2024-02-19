@@ -176,8 +176,10 @@ extension URLSessionHTTPClient: URLSessionTaskDelegate {
         _ session: URLSession, task: URLSessionTask,
         didFinishCollecting metrics: URLSessionTaskMetrics
     ) {
-        let protocols = metrics.transactionMetrics.map { $0.networkProtocolName ?? "-" }
-        os_log("protocols: \(protocols)")
+        if #available(iOS 14.0, *) {
+            let protocols = metrics.transactionMetrics.map { $0.networkProtocolName ?? "-" }
+            os_log("protocols: \(protocols)")
+        }
         if let metricsClosure = self.lock.perform(
             action: { self.metricsClosures.removeValue(forKey: task.taskIdentifier) }
         ) {
