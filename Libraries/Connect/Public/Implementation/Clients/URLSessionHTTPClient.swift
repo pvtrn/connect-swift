@@ -161,6 +161,7 @@ extension URLSessionHTTPClient: URLSessionDataDelegate {
             self.lock.perform { self.streams[task.taskIdentifier]?.requestBodyStream }
         )
     }
+
 }
 
 extension URLSessionHTTPClient: URLSessionTaskDelegate {
@@ -175,6 +176,8 @@ extension URLSessionHTTPClient: URLSessionTaskDelegate {
         _ session: URLSession, task: URLSessionTask,
         didFinishCollecting metrics: URLSessionTaskMetrics
     ) {
+        let protocols = metrics.transactionMetrics.map { $0.networkProtocolName ?? "-" }
+        os_log("protocols: \(protocols)")
         if let metricsClosure = self.lock.perform(
             action: { self.metricsClosures.removeValue(forKey: task.taskIdentifier) }
         ) {
